@@ -41,6 +41,10 @@ class DataIngestion:
         
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
         try:
-            pass
+            DataFrame = self.export_data_into_feature_store()
+            self.split_data_as_train_test(dataframe=DataFrame)
+            Data_Ingestion_Artifact= DataIngestionArtifact(trained_file_path=self.Data_Ingestion_Config.training_file_path,
+            test_file_path=self.Data_Ingestion_Config.testing_file_path)
+            return Data_Ingestion_Artifact
         except Exception as e:
             raise SensorException(e,sys)
