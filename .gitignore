@@ -131,3 +131,6 @@ build/
 dist/
 sensor.egg-info/
 artifact/
+sensor.egg-info/
+venv/
+artifact/
