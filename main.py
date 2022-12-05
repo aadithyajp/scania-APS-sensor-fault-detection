@@ -1,4 +1,7 @@
 from sensor.pipeline.training_pipeline import TrainPipeline
+from sensor.logger import logging
+from sensor.exception import SensorException
+import sys,os
 # def test_exception():
 #     try:
 #         logging.info("we are dividing be 0")
@@ -25,4 +28,4 @@ if __name__ == '__main__':
         training_pipeline.run_pipeline()
     except Exception as e:
         print(e)
-        # logging.exception(e)
+        logging.exception(e)

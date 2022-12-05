@@ -5,3 +5,4 @@ certifi
 from-root
 pandas
 scikit-learn==1.1.3
+PyYAML

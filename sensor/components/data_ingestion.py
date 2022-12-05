@@ -7,13 +7,15 @@ from sensor.constant.training_pipeline import SCHEMA_FILE_PATH
 from sensor.data_access.sensor_data import SensorData
 from sensor.entity.config_entity import DataIngestionConfig
 from sensor.entity.artifact_entity import DataIngestionArtifact
+from sensor.constant.training_pipeline import SCHEMA_FILE_PATH
+from sensor.utils.main_utils import read_yaml_file
 
 class DataIngestion:
     
     def __init__(self,Data_Ingestion_Config:DataIngestionConfig):
         try:
             self.Data_Ingestion_Config=Data_Ingestion_Config
-            
+            self._schema_config = read_yaml_file(SCHEMA_FILE_PATH)
         except Exception as e:
             raise SensorException(e,sys)
     
@@ -67,6 +69,7 @@ class DataIngestion:
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
         try:
             DataFrame = self.export_data_into_feature_store()
+            DataFrame = DataFrame.drop(self._schema_config["drop_columns"],axis=1)
             self.split_data_as_train_test(dataframe=DataFrame)
             Data_Ingestion_Artifact= DataIngestionArtifact(trained_file_path=self.Data_Ingestion_Config.training_file_path,
             test_file_path=self.Data_Ingestion_Config.testing_file_path)
