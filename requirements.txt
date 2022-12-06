@@ -6,3 +6,5 @@ from-root
 pandas
 scikit-learn==1.1.3
 PyYAML
+dill
+imblearn==0.0
