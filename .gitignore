@@ -134,3 +134,4 @@ artifact/
 sensor.egg-info/
 venv/
 artifact/
+saved_models/*
